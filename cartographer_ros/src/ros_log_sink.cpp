@@ -58,19 +58,23 @@ void ScopedRosLogSink::send(const ::google::LogSeverity severity,
 #endif
   switch (severity) {
     case ::google::GLOG_INFO:
-      RCLCPP_INFO_STREAM(logger_, message_string);
+      RCLCPP_INFO(rclcpp::get_logger("cartographer_ros"),
+        "%s", message_string.c_str());
       break;
 
     case ::google::GLOG_WARNING:
-      RCLCPP_WARN_STREAM(logger_, message_string);
+      RCLCPP_WARN(rclcpp::get_logger("cartographer_ros"),
+        "%s", message_string.c_str());
       break;
 
     case ::google::GLOG_ERROR:
-      RCLCPP_ERROR_STREAM(logger_, message_string);
+      RCLCPP_ERROR(rclcpp::get_logger("cartographer_ros"),
+        "%s", message_string.c_str());
       break;
 
     case ::google::GLOG_FATAL:
-      RCLCPP_FATAL_STREAM(logger_, message_string);
+      RCLCPP_FATAL(rclcpp::get_logger("cartographer_ros"),
+        "%s", message_string.c_str());
       will_die_ = true;
       break;
   }

@@ -38,6 +38,11 @@
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "nav_msgs/msg/occupancy_grid.hpp"
 
+//! @todo(srmainwaring) fix threading annotations on macOS / clang
+#define LOCKS_EXCLUDED(mutex)
+#define GUARDED_BY(mutex)
+#define EXCLUSIVE_LOCKS_REQUIRED(mutex)
+
 // Abseil unfortunately pulls in winnt.h, which #defines DELETE.
 // Clean up to unbreak visualization_msgs::msg::Marker::DELETE.
 #ifdef DELETE

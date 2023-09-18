@@ -39,6 +39,11 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/version.h>
 
+//! @todo(srmainwaring) fix threading annotations on macOS / clang
+#define LOCKS_EXCLUDED(mutex)
+#define GUARDED_BY(mutex)
+#define EXCLUSIVE_LOCKS_REQUIRED(mutex)
+
 DEFINE_double(resolution, 0.05,
               "Resolution of a grid cell in the published occupancy grid.");
 DEFINE_double(publish_period_sec, 1.0, "OccupancyGrid publishing period.");
