@@ -27,6 +27,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra)
 endif()
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 find_package(cartographer REQUIRED)
@@ -45,6 +46,13 @@ find_package(rclcpp REQUIRED)
 find_package(rviz_common REQUIRED)
 find_package(rviz_ogre_vendor REQUIRED)
 find_package(rviz_rendering REQUIRED)
+
+include(FindPkgConfig)
+if (NOT WIN32)
+  PKG_SEARCH_MODULE(CAIRO REQUIRED cairo>=1.12.16)
+else()
+  find_library(CAIRO_LIBRARIES cairo)
+endif()
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
@@ -94,6 +102,7 @@ target_link_libraries(${PROJECT_NAME}
   rviz_common::rviz_common
   )
 
+target_link_directories(${PROJECT_NAME} PUBLIC ${CAIRO_LIBRARY_DIRS})
 
 pluginlib_export_plugin_description_file(rviz_common rviz_plugin_description.xml)
 register_rviz_ogre_media_exports(DIRECTORIES "ogre_media/materials/glsl120" "ogre_media/materials/scripts")

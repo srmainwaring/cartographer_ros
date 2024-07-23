@@ -39,6 +39,11 @@
 #include "rviz_rendering/objects/movable_text.hpp"
 #include <rviz_common/properties/bool_property.hpp>
 
+//! @todo(srmainwaring) fix threading annotations on macOS / clang
+#define LOCKS_EXCLUDED(mutex)
+#define GUARDED_BY(mutex)
+#define EXCLUSIVE_LOCKS_REQUIRED(mutex)
+
 namespace cartographer_rviz {
 
 // Contains all the information needed to render a submap onto the final
